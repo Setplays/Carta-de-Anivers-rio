@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARABÉNSSSSS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Mali', cursive, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe6ee 0%, #ffc0d3 50%, #ffb3c6 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 30px 15px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .heart-particle {
+            position: fixed;
+            color: #ff4d8d;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            animation: floatUp 6s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.5) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 650px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            border: 4px solid #ff80ab;
+            border-radius: 25px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+
+        .header-svg {
+            margin-bottom: 10px;
+            filter: drop-shadow(0px 4px 8px rgba(255, 105, 180, 0.4));
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .header-svg:hover {
+            transform: scale(1.08) rotate(-3deg);
+        }
+
+        h1 {
+            color: #d81b60;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(255, 182, 193, 0.8);
+        }
+
+        p.subtitle {
+            color: #880e4f;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        .envelope-wrapper {
+            background: #fff0f5;
+            border: 3px dashed #ff4d8d;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .envelope-wrapper:hover {
+            background: #ffe4e1;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 77, 141, 0.25);
+        }
+
+        .envelope-title {
+            color: #c2185b;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .letter-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .letter-content {
+            background: #ffffff;
+            border: 4px solid #ff4d8d;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+            text-align: left;
+            position: relative;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .letter-content h2 {
+            color: #d81b60;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .letter-content p {
+            color: #4a4a4a;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .close-btn {
+            display: block;
+            margin: 20px auto 0 auto;
+            background: #ff4d8d;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #d81b60;
+        }
+
+        .section-title {
+            color: #c2185b;
+            font-size: 1.3rem;
+            margin: 20px 0 15px 0;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .reason-card {
+            background: #ffffff;
+            border: 2px solid #ffb6c1;
+            border-radius: 15px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reason-card:hover {
+            border-color: #ff4d8d;
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.5);
+        }
+
+        .reason-card .card-header {
+            font-weight: bold;
+            color: #d81b60;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .reason-card .card-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin-top 0.4s ease;
+            color: #555;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        .reason-card.active .card-body {
+            max-height: 120px;
+            margin-top: 10px;
+        }
+
+        .interactive-question {
+            background: #fff5f8;
+            border: 3px solid #ff80ab;
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 10px;
+        }
+
+        .question-text {
+            color: #ad1457;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 50px;
+            position: relative;
+        }
+
+        .btn-choice {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn-yes {
+            background: #ff4d8d;
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 77, 141, 0.4);
+        }
+
+        .btn-yes:hover {
+            background: #e91e63;
+            transform: scale(1.1);
+        }
+
+        .btn-no {
+            background: #e0e0e0;
+            color: #666;
+            position: relative;
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 20px;
+            color: #d81b60;
+            font-size: 1.3rem;
+            font-weight: bold;
+            animation: popIn 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="HELOKITY.png" width="94" height="105">
+
+        <h1>FELIZ ANIVERSÁRIOOO 🎀</h1>
+        <p class="subtitle">19 ANINHOS para: Julia Fromm</p>
+
+        <div class="envelope-wrapper" onclick="openLetter()">
+            <div class="envelope-title">
+                ✉️ Clique aqui para abrir sua cartinha secreta
+            </div>
+        </div>
+
+
+        <h2 class="section-title">Motivos que me fazem te amar 💖</h2>
+        <div class="reasons-grid">
+            <div class="reason-card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <span>1. Seu sorriso lindo</span>
+                    <span><img src="sorriso.png" width="25" height="25"></span>
+                </div>
+                <div class="card-body">
+                    Tudo vale a pena pra mim quando te vejo feliz.
+                </div>
+            </div>
+
+            <div class="reason-card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <span>2. Nossos momentos</span>
+                    <span><img src="momentos.png" width="25" height="25"></span>
+                </div>
+                <div class="card-body">
+                    Estar com você é igualzinha a viver um filme clichê de romance, e é tudo que eu sempre quis pra minha vida.
+                </div>
+            </div>
+
+            <div class="reason-card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <span>3. Seu jeito carinhoso</span>
+                    <span><img src="jeito.png" width="25" height="25"></span>
+                </div>
+                <div class="card-body">
+                    Amo como você gosta de cozinhar pra mim e lembra de comprar pepsi que eu gosto kkkkkk, você me trata de uma forma que realmente nenhuma garota tratou antes.
+                </div>
+            </div>
+
+            <div class="reason-card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <span>4. Nosso futuro juntos</span>
+                    <span><img src="futuro.png" width="25" height="25"></span>
+                </div>
+                <div class="card-body">
+                    Sempre que penso nisso, consigo visualizar um futuro mesmo, damos certo juntos e só vejo mais motivos a cada dia pra compartilhar a vida com você.
+                </div>
+            </div>
+        </div>
+
+        <div class="interactive-question">
+            <div class="question-text">Quer abrir o seu presente? 🥺💕 Só clicar em sim caso esteja com o presente em mãos</div>
+            <div class="buttons-container" id="btnContainer">
+                <button class="btn-choice btn-yes" onclick="acceptLove()">SIM! 💖</button>
+                <button class="btn-choice btn-no" id="btnNo" onmouseover="dodgeButton()" onclick="dodgeButton()">Não</button>
+            </div>
+            <div class="success-message" id="successMessage">
+                Te amo nenê, aproveita sua nova casinha que vc merece muito 💖🎀✨ 
+            </div>
+        </div>
+    </div>
+
+    <div class="letter-modal" id="letterModal">
+        <div class="letter-content">
+            <h2>Pitiquinha, 💌</h2>
+            <p>
+                Decidi criar essa página pra que você saiba, nesse dia tão especial que é o dia do seu aniversário, que eu te amo muito, e que nada vai mudar isso NUNCA.
+            </p>
+            <p>
+                Você faz a minha vida mais feliz, e realmente é a melhor namorada do mundo. Não é só por falar, porque quando eu digo isso, eu digo porque nunca tive tanta certeza que encontrei a pessoa certa antes.
+            </p>
+            <p>
+                Aproveita seu dia meu amor, que você tenha muita saúde, muita alegria, e muito sucesso pela frente, porque você merece tudo isso.
+            </p>
+            <button class="close-btn" onclick="closeLetter()">Aceitar termos e condições para beijinhos comemorativos infinitos</button>
+        </div>
+    </div>
+
+    <script>
+        function playCuteSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime); // Nota D5
+                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.25); // Nota A5
+
+                gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start();
+                osc.stop(ctx.currentTime + 0.25);
+            } catch (e) {
+            }
+        }
+
+        function createHearts() {
+            const symbols = ['💖', '🎀', '🌸', '💕', '✨'];
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                document.body.appendChild(heart);
+            }
+        }
+
+        function openLetter() {
+            playCuteSound();
+            document.getElementById('letterModal').style.display = 'flex';
+        }
+
+        function closeLetter() {
+            playCuteSound();
+            document.getElementById('letterModal').style.display = 'none';
+        }
+
+        // Expandir Cartões de Motivos
+        function toggleCard(card) {
+            playCuteSound();
+            card.classList.toggle('active');
+        }
+
+        function dodgeButton() {
+            playCuteSound();
+            const btnNo = document.getElementById('btnNo');
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 100 - 50;
+            btnNo.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function acceptLove() {
+            playCuteSound();
+            document.getElementById('btnContainer').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const burst = document.createElement('div');
+                    burst.className = 'heart-particle';
+                    burst.innerText = '💖';
+                    burst.style.left = (Math.random() * 80 + 10) + 'vw';
+                    burst.style.fontSize = '30px';
+                    burst.style.animationDuration = '2s';
+                    document.body.appendChild(burst);
+                }, i * 50);
+            }
+        }
+
+        createHearts();
+    </script>
+</body>
+</html>
